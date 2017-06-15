@@ -1,7 +1,7 @@
 <!DOCTYPE  html>
 	<html>
 	  <head>
-	    <title>Page title</title>
+	    <title>Велостанции</title>
 	    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 	    <style>
 	      body {
@@ -19,58 +19,7 @@
 	            zoom: 9
 	        });
 
-	        var data = [
-	            {
-	                "global_id": 2757725,
-	                "ObjectOperOrgPhone": [
-	                    {
-	                        "OperationOrganizationPhone": "(495) 361-78-07"
-	                    }
-	                ],
-	                "Name": "Велосипедная парковка № 37124 «Гимназия № 1506»",
-	                "AdmArea": "Северо-Восточный административный округ",
-	                "District": "район Северное Медведково",
-	                "Address": "Широкая улица, дом 1А",
-	                "DepartamentalAffiliation": "Департамент транспорта и развития дорожно-транспортной инфраструктуры города Москвы",
-	                "Longitude_WGS84": "37.650781",
-	                "Latitude_WGS84": "55.889628",
-	                "ID": 32,
-	                "Capacity": 10,
-	                "ObjectOperOrgName": "ГКУ Центр организации дорожного движения Правительства Москвы",
-	                "geoData": {
-	                    "type": "Point",
-	                    "coordinates": [
-	                        37.65078100009828,
-	                        55.88962800016613
-	                    ]
-	                }
-	            },
-	            {
-	                "global_id": 2757727,
-	                "ObjectOperOrgPhone": [
-	                    {
-	                        "OperationOrganizationPhone": "(495) 361-78-07"
-	                    }
-	                ],
-	                "Name": "Велосипедная парковка № 21052 «Житная улица, дом 16»",
-	                "AdmArea": "Центральный административный округ",
-	                "District": "район Якиманка",
-	                "Address": "Житная улица, дом 16",
-	                "DepartamentalAffiliation": "Департамент транспорта и развития дорожно-транспортной инфраструктуры города Москвы",
-	                "Longitude_WGS84": "37.614030",
-	                "Latitude_WGS84": "55.730393",
-	                "ID": 34,
-	                "Capacity": 10,
-	                "ObjectOperOrgName": "ГКУ Центр организации дорожного движения Правительства Москвы",
-	                "geoData": {
-	                    "type": "Point",
-	                    "coordinates": [
-	                        37.614030000153456,
-	                        55.73039300013788
-	                    ]
-	                }
-	            }
-	        ];
+
 
 	        myPlacemark = new ymaps.Placemark([data[0].geoData.coordinates[1], data[0].geoData.coordinates[0]], {
 	            hintContent: data[0].Name,
