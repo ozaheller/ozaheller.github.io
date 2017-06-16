@@ -1,38 +1,58 @@
 <!DOCTYPE  html>
-	<html>
-	  <head>
-	    <title>Велостанции</title>
-	    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-	    <style>
-	      body {
-	          width: 100%;
-	          height: 100%;
-	      }
-	    </style>
-	    <script type="text/javascript">
-	      ymaps.ready(init);
-	      var myMap;
+<html>
+    <head>
+        <title>Page title</title>
 
-	      function init(){
-	          myMap = new ymaps.Map("map", {
-	            center: [55.76, 37.64],
-	            zoom: 9
-	        });
+        <!-- Загружаем API Яндекс.Карт -->
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 
-
-
-	        myPlacemark = new ymaps.Placemark([data[0].geoData.coordinates[1], data[0].geoData.coordinates[0]], {
-	            hintContent: data[0].Name,
-	            balloonContent: data[0].Address
-	        });
-
-	        myMap.geoObjects.add(myPlacemark);
-	      }
-	  </script>
-	  </head>
-
-
-	  <body>
-	    <div id="map" style="width: 100%; height: 500px"></div>
-	  </body>
-	</html>
+        <script type="text/javascript">
+            // Активируем карту, когда API загружено
+            ymaps.ready(init);
+            var myMap;
+            function init() {
+                // Функция до доступа к файлу
+                function loadJSON(callback) {
+                    var xobj = new XMLHttpRequest();
+                    xobj.overrideMimeType("application/json");
+                    xobj.open('GET', 'data.json', true);
+                    xobj.onreadystatechange = function() {
+                        if (xobj.readyState == 4 && xobj.status == "200") {
+                            callback(xobj.responseText);
+                        }
+                    };
+                    xobj.send(null);
+                }
+                // Запускаем функцию
+                loadJSON(function(response) {
+                    // Распарсиваем файл
+                    var json = JSON.parse(response);
+                    // Создаем карту
+                    myMap = new ymaps.Map("map", {
+                        center: [55.76, 37.64],
+                        zoom: 15
+                    });
+                    // Выполняем для каждого элемента в массиве данных
+                    for (var i = 0; i < json.length; i++) {
+                        // Создаем точку с координатами, названием и адресом
+                        myPlacemark = new ymaps.Placemark([json[i].geoData.coordinates[1], json[i].geoData.coordinates[0]], {
+                            hintContent: json[i].Name,
+                            balloonContent: json[i].Address
+                        });
+                        // Добавляем точку на карту
+                        myMap.geoObjects.add(myPlacemark);
+                    }
+                });
+            }
+        </script>
+        <style>
+            body {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map" style="width: 100%; height: 600px"></div>
+    </body>
+</html>
